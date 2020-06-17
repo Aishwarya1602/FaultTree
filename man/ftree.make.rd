@@ -8,8 +8,8 @@
 
 \usage{
 ftree.make(type, reversible_cond=FALSE, cond_first=TRUE, human_pbf=NULL,
-		 start_id=1, system_mission_time=NULL, label="", name="", name2="",
-		 description="")
+		 start_id=1, system_mission_time=NULL, tag="", label="", name="",
+		  name2="", description="")
 }
 
 \arguments{
@@ -20,6 +20,7 @@ ftree.make(type, reversible_cond=FALSE, cond_first=TRUE, human_pbf=NULL,
 \item{human_pbf}{A probability of failure for a human to respond as needed to an alarm. This value is only used by the alarm gate.}
 \item{start_id}{ An integer value for the starting unique ID, useful for transfer objects. }
 \item{system_mission_time}{ An optional method for setting mission_time for the entire tree. It is also possible to set mission_time as a global variable. Use of system_mission_time in ftree.make will take precidence.}
+\item{tag}{A short identifying string (including numeric characters) to represent this top event.}
 \item{label}{An identifying string for the logic gate. Use of label defines the convention for rest of tree construction.}
 \item{name}{ An identifying string for the logic gate.}
 \item{name2}{ A second line, if needed for the identifying string label}
@@ -27,7 +28,7 @@ ftree.make(type, reversible_cond=FALSE, cond_first=TRUE, human_pbf=NULL,
 }
 
 \value{
-Returns a dataframe holding data, results, and connection information.
+Returns a dataframe holding data, uncalculated results, and connection information.
 }
 
 \references{

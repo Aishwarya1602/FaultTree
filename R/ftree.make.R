@@ -16,7 +16,7 @@
 
 
 ftree.make<-function(type, reversible_cond=FALSE, cond_first=TRUE, 
-		human_pbf=NULL, start_id=1, system_mission_time=NULL,
+		human_pbf=NULL, start_id=1, system_mission_time=NULL, tag="",
 		label="", name="", name2="",description="")  {
 
 	thisID<-start_id
@@ -105,7 +105,7 @@ if(tp==16)  {stop("atleast gate requires FaultTree.SCRAM and connot be top event
 	DF<-data.frame(
 		ID=	thisID	,
 		GParent=	-1	,
-		Tag=	"top"	,
+		Tag=	tag	,
 		Type=	tp	,
 		CFR=	-1	,
 		PBF=	-1	,
