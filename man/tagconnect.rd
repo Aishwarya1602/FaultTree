@@ -37,7 +37,7 @@ Volume 3, Issue 4 American Institute of Chemical Engineers
 }
 
 \examples{
-mytree <-ftree.make(type="and", name="common cause failure", name2="of redundant pumps")
+mytree <-ftree.make(type="and", tag="top", name="common cause failure", name2="of redundant pumps")
 mytree<-addActive(mytree,at="top",mttf=3,mttr=12/8760, tag="p1", name="Pump")
 mytree <- addProbability(mytree,  at="top", prob=.05, name="common cause", name2="beta factor")
 pumpIDvalue<-tagconnect(mytree, at="p1")

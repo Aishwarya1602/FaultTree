@@ -43,11 +43,11 @@ Returns a dataframe containing 18 columns for holding data, results, and connect
 
 \examples{
 minex2<-ftree.make(type="and")
-minex2<-addProbability(minex2, at="top", prob=.01, tag="X1", name="X1")
-minex2<-addLogic(minex2, at="top", type="or", tag="G1", name="G1")
+minex2<-addProbability(minex2, at=1, prob=.01, tag="X1", name="X1")
+minex2<-addLogic(minex2, at=1, type="or", tag="G1", name="G1")
 minex2<-addProbability(minex2, at="G1", prob=.02, tag="X2", name="X2")
 minex2<-addProbability(minex2, at="G1", prob=.03, tag="X3", name="X3")
-minex2<-addLogic(minex2, at="top", type="or", tag="G2", name="G2")
+minex2<-addLogic(minex2, at=1, type="or", tag="G2", name="G2")
 minex2<-addDuplicate(minex2, at="G2", dup_of="X3")
 minex2<-addProbability(minex2, at="G2", prob=.04, tag="X4", name="X4")
 minex2<-ftree.calc(minex2, use.bdd=TRUE)
