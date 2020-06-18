@@ -16,9 +16,9 @@
 
  addExposed<-function (DF, at, mttf, dist="exponential", param=NULL, display_under=NULL, 
 		tag="", exposure=NULL, label="", name="",name2="", description="")  {
-
+			
 	at <- tagconnect(DF, at)
-
+	
 	if(label!="")  {
 		if(any(DF$Name!="") || any(DF$Name2!="")) {
 			stop("Cannot use label once name convention has been established.")
@@ -29,6 +29,31 @@
 			stop("Cannot use name convention once label has been established.")
 		}
 	}
+	
+## apply tag-centric convention test			
+	if(DF$Tag[1] != "" && tag == "") stop("tag entry required for tag-centric convention")		
+			
+	if(tag!="")  {		
+		if (length(which(DF$Tag == tag) != 0)) {	
+			stop("tag is not unique")
+		}	
+	## Avoid conflicts with default tag names
+		if(tag=="top") {stop("'top' is a reserved tag name")}
+		if(length(tag)>2){
+			if(substr(tag,1,2)=="E_" || substr(tag,1,2)=="G_" || substr(tag,1,2)=="H_") {
+			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")
+			}
+		}	
+	}
+
+## This code appears to no longer have purpose, 			
+## calls to SCRAM or ftree.calc with use.bdd=TRUE			
+## or addTransfer and ftree.combine now require tag-centric convention.			
+## apply default tag names if not specified			
+	if(tag=="")  {		
+		tag<-paste0("E_", thisID)	
+	}		
+		
 
   	tp <-5
 
@@ -105,18 +130,7 @@ if( !mt>0) {
 
 
 
-## Avoid conflicts with default tag names
-	if(tag=="top") {stop("'top' is a reserved tag name")}
-	if(length(tag)>2){
-		if(substr(tag,1,2)=="E_" || substr(tag,1,2)=="G_" || substr(tag,1,2)=="H_") {
-		stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")
-		}
-	}
 
-## apply default tag names if not specified
-	if(tag=="")  {
-		tag<-paste0("E_", thisID)
-	}
 
 	Dfrow <- data.frame(
 		ID = thisID,

@@ -28,7 +28,23 @@ addUndeveloped<-function(DF, at, prob=0, tag="", label="", name="", name2="", de
 			stop("Cannot use name convention once label has been established.")
 		}
 	}
-	
+
+## apply tag-centric convention test				
+	if(DF$Tag[1] != "" && tag == "") stop("tag entry required for tag-centric convention")			
+				
+	if(tag!="")  {			
+		if (length(which(DF$Tag == tag) != 0)) {		
+			stop("tag is not unique")	
+		}		
+	## Avoid conflicts with default tag names			
+		if(tag=="top") {stop("'top' is a reserved tag name")}		
+		if(length(tag)>2){		
+			if(substr(tag,1,2)=="E_" || substr(tag,1,2)=="G_" || substr(tag,1,2)=="H_") {	
+			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")	
+		}		
+	}			
+## NOTE: there never was code to auto-generate the tag for an undeveloped event		
+			
   tp <- 6
   
 

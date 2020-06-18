@@ -29,7 +29,28 @@ addLatent<-function(DF, at, mttf, mttr=NULL, pzero=NULL, inspect=NULL, display_u
 			stop("Cannot use name convention once label has been established.")
 		}
 	}
-
+## apply tag-centric convention test				
+	if(DF$Tag[1] != "" && tag == "") stop("tag entry required for tag-centric convention")			
+				
+	if(tag!="")  {			
+		if (length(which(DF$Tag == tag) != 0)) {		
+			stop("tag is not unique")	
+		}		
+	## Avoid conflicts with default tag names			
+		if(tag=="top") {stop("'top' is a reserved tag name")}		
+		if(length(tag)>2){		
+			if(substr(tag,1,2)=="E_" || substr(tag,1,2)=="G_" || substr(tag,1,2)=="H_") {	
+			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")	
+		}		
+	}			
+## This code appears to no longer have purpose, 				
+## calls to SCRAM or ftree.calc with use.bdd=TRUE				
+## or addTransfer and ftree.combine now require tag-centric convention.		
+## apply default tag names if not specified
+	if(tag=="")  {
+		tag<-paste0("E_", thisID)
+	}
+	
 	tp<-2 
 	etp<-0
 	mt<-DF$P2[which(DF$ID==min(DF$ID))]
@@ -76,10 +97,7 @@ addLatent<-function(DF, at, mttf, mttr=NULL, pzero=NULL, inspect=NULL, display_u
 ## Now it is okay to set mttr to -1 for ftree entry
 	if(is.null(mttr)) { mttr<- (-1)}
 
-## apply default tag names if not specified
-	if(tag=="")  {
-		tag<-paste0("E_", thisID)
-	}
+
 
 	Dfrow<-data.frame(
 		ID=	thisID	,

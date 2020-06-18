@@ -42,6 +42,11 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		}
 	}
 
+## apply default tag names if not specified
+	if(tag=="")  {
+		tag<-paste0("G_", thisID)
+	}
+	
 	at <- tagconnect(DF, at)
 
 	if(type=="atleast") {
@@ -157,10 +162,6 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		}
 	}
 
-## apply default tag names if not specified
-	if(tag=="")  {
-		tag<-paste0("G_", thisID)
-	}
 	
 	Dfrow<-data.frame(
 		ID=	thisID	,
