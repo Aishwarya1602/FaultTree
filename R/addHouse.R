@@ -40,16 +40,11 @@ addHouse<-function(DF, at, prob=1, tag="", label="", name="", name2="", descript
 		if(tag=="top") {stop("'top' is a reserved tag name")}		
 		if(length(tag)>2){		
 			if(substr(tag,1,2)=="E_" || substr(tag,1,2)=="G_" || substr(tag,1,2)=="H_") {	
-			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")	
+			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")
+			}
 		}		
 	}			
-## This code appears to no longer have purpose, 				
-## calls to SCRAM or ftree.calc with use.bdd=TRUE				
-## or addTransfer and ftree.combine now require tag-centric convention.				
-## apply default tag names if not specified
-	if(tag=="")  {
-		tag<-paste0("H_", thisID)
-	}
+
 	
  	tp=9
 
@@ -59,6 +54,15 @@ addHouse<-function(DF, at, prob=1, tag="", label="", name="", name2="", descript
 	gp<-info[3]
 	condition<-info[4]
 
+## This code appears to no longer have purpose,
+ ## It is required to be positioned after the test.basic call for thisID 				
+## calls to SCRAM or ftree.calc with use.bdd=TRUE				
+## or addTransfer and ftree.combine now require tag-centric convention.				
+## apply default tag names if not specified
+	if(tag=="")  {
+		tag<-paste0("H_", thisID)
+	}
+	
 	if(!(prob==0 || prob==1))  {stop("probability entry must be either one or zero")}
 
 ## House can only be placed under AND or INHIBIT (with Cond==1)

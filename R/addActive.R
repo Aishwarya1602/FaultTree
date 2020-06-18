@@ -44,13 +44,6 @@ addActive<-function(DF, at, mttf, mttr, display_under=NULL, tag="", label="", na
 			}
 		}		
 	}			
-## This code appears to no longer have purpose, 
-## calls to SCRAM or ftree.calc with use.bdd
-## or addTransfer and ftree.combine now require tag-centric convention.
-## apply default tag names if none specified
-	if(tag=="")  {
-		tag<-paste0("E_", thisID)
-	}
 
 	
 	tp<-1
@@ -60,6 +53,15 @@ addActive<-function(DF, at, mttf, mttr, display_under=NULL, tag="", label="", na
 	parent<-info[2]
 	gp<-info[3]
 	condition<-info[4]
+	
+## This code appears to no longer have purpose, 
+## It is required to be positioned after the test.basic call for thisID
+## calls to SCRAM or ftree.calc with use.bdd
+## or addTransfer and ftree.combine now require tag-centric convention.
+## apply default tag names if none specified
+	if(tag=="")  {
+		tag<-paste0("E_", thisID)
+	}	
 
 ## default settings for RAM model Active event only
 	etp<-0

@@ -45,14 +45,7 @@
 			}
 		}	
 	}
-
-## This code appears to no longer have purpose, 			
-## calls to SCRAM or ftree.calc with use.bdd=TRUE			
-## or addTransfer and ftree.combine now require tag-centric convention.			
-## apply default tag names if not specified			
-	if(tag=="")  {		
-		tag<-paste0("E_", thisID)	
-	}		
+		
 		
 
   	tp <-5
@@ -63,6 +56,15 @@
 	gp<-info[3]
 	condition<-info[4]
 
+## This code appears to no longer have purpose, 
+## It is required to be positioned after the test.basic call for thisID			
+## calls to SCRAM or ftree.calc with use.bdd=TRUE			
+## or addTransfer and ftree.combine now require tag-centric convention.			
+## apply default tag names if not specified			
+	if(tag=="")  {		
+		tag<-paste0("E_", thisID)	
+	}
+	
 ## Model test - use of Demand type  or gate types ALARM or VOTE negates PRA processing
 	if(any(DF$Type==3) || any(DF$Type==13) || any(DF$Type==15)){
 		warning("exposed system event called for in RAM model")

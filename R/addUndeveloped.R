@@ -40,7 +40,8 @@ addUndeveloped<-function(DF, at, prob=0, tag="", label="", name="", name2="", de
 		if(tag=="top") {stop("'top' is a reserved tag name")}		
 		if(length(tag)>2){		
 			if(substr(tag,1,2)=="E_" || substr(tag,1,2)=="G_" || substr(tag,1,2)=="H_") {	
-			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")	
+			stop("tag prefixes E_, G_ and H_ are reserved for MEF defaults")
+			}
 		}		
 	}			
 ## NOTE: there never was code to auto-generate the tag for an undeveloped event		

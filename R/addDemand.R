@@ -44,13 +44,7 @@ addDemand<-function(DF, at, mttf, tag="", label="", name="", name2="", descripti
 			}
 		}		
 	}			
-## This code appears to no longer have purpose, 
-## calls to SCRAM or ftree.calc with use.bdd
-## or addTransfer and ftree.combine now require tag-centric convention.	
-## apply default tag names if not specified
-	if(tag=="")  {
-		tag<-paste0("E_", thisID)
-	}
+
 	
 	tp=3
 
@@ -67,7 +61,14 @@ addDemand<-function(DF, at, mttf, tag="", label="", name="", name2="", descripti
 	gp<-info[3]
 	condition<-info[4]
 
-
+## This code appears to no longer have purpose,
+## It is required to be positioned after the test.basic call for thisID 
+## calls to SCRAM or ftree.calc with use.bdd
+## or addTransfer and ftree.combine now require tag-centric convention.	
+## apply default tag names if not specified
+	if(tag=="")  {
+		tag<-paste0("E_", thisID)
+	}
 
 	if(!mttf>0)  {stop("demand interval must be greater than zero")}
 

@@ -16,7 +16,9 @@
 
 addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_pbf=NULL,
 		vote_par=NULL, tag="", label="", name="", name2="", description="")  {
-
+	
+	at <- tagconnect(DF, at)
+	
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
 
 	if(label!="")  {
@@ -42,12 +44,6 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		}
 	}
 
-## apply default tag names if not specified
-	if(tag=="")  {
-		tag<-paste0("G_", thisID)
-	}
-	
-	at <- tagconnect(DF, at)
 
 	if(type=="atleast") {
 		stop("atleast must be added through FaultTree.SCRAM::addAtLeast")
@@ -81,6 +77,16 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 	if(length(parent)==0) {stop("connection reference not valid")}
 	thisID<-max(DF$ID)+1
 	if(DF$Type[parent]<10) {stop("non-gate connection requested")}
+
+
+## This code appears to no longer have purpose,
+## It is required to be positioned after thisID has been established
+## calls to SCRAM or ftree.calc with use.bdd
+## or addTransfer and ftree.combine now require tag-centric convention.	
+## apply default tag names if not specified
+	if(tag=="")  {
+		tag<-paste0("G_", thisID)
+	}
 
 	if(!DF$MOE[parent]==0) {
 		stop("connection cannot be made to duplicate nor source of duplication")
