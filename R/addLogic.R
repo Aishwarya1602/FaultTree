@@ -19,8 +19,6 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
 
-	at <- tagconnect(DF, at)
-
 	if(label!="")  {
 		if(any(DF$Name!="") || any(DF$Name2!="")) {
 			stop("Cannot use label once name convention has been established.")
@@ -32,6 +30,8 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		}
 	}
 	
+	if(DF$Tag[1] != "" && tag == "") stop("tag entry required for tag-centric convention")
+	
 	if(tag!="")  {
 		if (length(which(DF$Tag == tag) != 0)) {
 			stop("tag is not unique")
@@ -42,6 +42,7 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		}
 	}
 
+	at <- tagconnect(DF, at)
 
 	if(type=="atleast") {
 		stop("atleast must be added through FaultTree.SCRAM::addAtLeast")
